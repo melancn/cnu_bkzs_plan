@@ -19,6 +19,10 @@ with open(r'C:\Users\cc\Desktop\jingnei.txt') as f:
                 majorarr.append(temp[1])
             regionarr[region][temp[1]] = temp[2]
 
+temp = sorted(regionarr.items(),key=lambda d:d[0])
+reg = {}
+for k,v in temp:
+    reg[k] = v
 
 with open(r'C:\Users\cc\Desktop\jingnei.csv','ab') as f:
     csvarr = ['']
@@ -27,8 +31,7 @@ with open(r'C:\Users\cc\Desktop\jingnei.csv','ab') as f:
     csvstr = ','.join(csvarr) + '\n'
     csvstr = csvstr.encode('GBK')
     f.write(csvstr)
-    for region in regionarr:
-        regmajor = regionarr[region]
+    for region,regmajor in temp:
         csvarr = []
         csvarr.append('"' + region + '"')
         for major in majorarr:
